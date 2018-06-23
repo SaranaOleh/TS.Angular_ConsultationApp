@@ -1,0 +1,18 @@
+.panel{
+  background: #efefef;
+  padding: 20px;
+}
+.panel>.panel-header{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 4px dashed brown;
+}
+.panel-body>table{
+    width: 100%;
+  table-layout: fixed;
+}
+.close{
+  display: flex;
+  justify-content: flex-end;
+}

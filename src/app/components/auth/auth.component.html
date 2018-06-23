@@ -1,0 +1,14 @@
+<div class="bg">
+  <div class="form">
+    <input type="text" placeholder="login" [(ngModel)]="formData.login">
+    <input type="password" placeholder="password" [(ngModel)]="formData.pass">
+    <ng-container *ngIf="mode==='register'">
+      <input type="submit"  value="Register" (click)="onRegister()">
+      <span class="link" (click)="mode='login'">login</span>
+    </ng-container>
+    <ng-container *ngIf="mode==='login'" >
+      <input type="submit" value="Login" (click)="onLogin()">
+      <span class="link" (click)="mode='register'">register</span>
+    </ng-container>
+  </div>
+</div>

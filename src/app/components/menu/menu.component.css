@@ -1,0 +1,10 @@
+.menu>ul li{
+  padding: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  background: #6f1ead;
+  color: hotpink;
+}
+.menu>ul li.active{
+  color: white;
+}

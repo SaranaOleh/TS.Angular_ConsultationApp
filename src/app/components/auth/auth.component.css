@@ -1,0 +1,29 @@
+.bg{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #f1d796;
+}
+.bg>.form{
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -200px;
+  text-align: center;
+}
+.bg>.form>input{
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  border: 2px solid black;
+}
+.bg>.form>span{
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+.bg>.form>input:last-of-type{
+  cursor: pointer;
+}

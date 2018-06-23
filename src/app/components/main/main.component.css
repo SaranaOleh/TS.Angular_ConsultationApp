@@ -1,0 +1,28 @@
+.container{
+  width: 100%;
+  min-height: 100vh;
+  background: cornflowerblue;
+  display: table;
+}
+.container .lbar, .container .content{
+  display: table-cell;
+  vertical-align: top;
+}
+.lbar{
+  width: 250px;
+  background: indigo;
+  color: #efefef;
+}
+.container .lbar .top{
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background: hotpink;
+}
+.container .lbar .top span{
+  color: #78fb44;
+}
+.container .content{
+  padding: 40px;
+}

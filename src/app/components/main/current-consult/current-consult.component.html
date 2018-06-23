@@ -1,0 +1,41 @@
+<div class="panel">
+  <ng-container *ngIf="firstConsult === null">
+    <div class="panel-header">
+      <h1>{{time}}</h1>
+      <button (click)="openConsult()">Начать</button>
+    </div>
+    <div class="panel-body">
+      <table>
+        <tr>
+          <th>Имя</th>
+          <th>Группа</th>
+          <th>Событие</th>
+        </tr>
+      </table>
+      <div class="close">
+        <button >Закрыть консультацию</button>
+      </div>
+
+    </div>
+  </ng-container>
+  <ng-container *ngIf="firstConsult !== null">
+    <div class="panel-header">
+      <h1>{{time}}</h1>
+    </div>
+    <div class="panel-body">
+      <table>
+        <tr>
+          <th>Имя</th>
+          <th>Группа</th>
+          <th>Событие</th>
+        </tr>
+      </table>
+      <div class="close">
+        <button >Закрыть консультацию</button>
+      </div>
+
+    </div>
+  </ng-container>
+  <button (click)="takeConsult()">CLICK</button>
+
+</div>
