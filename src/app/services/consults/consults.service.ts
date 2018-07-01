@@ -25,7 +25,72 @@ export class ConsultsService {
     const headers = {
       'Content-Type':'application/x-www-form-urlencoded'
     };
-    return this.http.post(Constants.url('api/takeConsult'),params.toString(),{headers});
+    return this.http.post(Constants.url('api/takeConsult'),params.toString(),{headers})
+      .pipe(tap(e=>{
+        if(e['status'] !== 'ok') this.auth.invalidateSession();
+      }));
+  }
+  getGroups(){
+    const params = new HttpParams().set("token", this.auth.getToken());
+    const headers = {
+      'Content-Type':'application/x-www-form-urlencoded'
+    };
+    return this.http.post(Constants.url('api/getGroups'),params.toString(),{headers})
+      .pipe(tap(e=>{
+        if(e['status'] !== 'ok') this.auth.invalidateSession();
+      }));
+  }
+  addStudentToGroup(name,surname,group_id){
+    const params = new HttpParams()
+      .set('name',name)
+      .set('surname',surname)
+      .set('group_id',group_id)
+      .set("token", this.auth.getToken());
+    const headers = {
+      'Content-Type':'application/x-www-form-urlencoded'
+    };
+    return this.http.post(Constants.url('api/addStudent'),params.toString(),{headers})
+      .pipe(tap(e=>{
+        if(e['status'] === 'auth_fail') this.auth.invalidateSession();
+      }));
+  }
 
+  addStudentToConsult(student_id){
+    const params = new HttpParams()
+      .set('student_id',student_id)
+      .set("token", this.auth.getToken());
+    const headers = {
+      'Content-Type':'application/x-www-form-urlencoded'
+    };
+    return this.http.post(Constants.url('api/addStudentToConsult'),params.toString(),{headers})
+      .pipe(tap(e=>{
+        if(e['status'] === 'auth_fail') this.auth.invalidateSession();
+      }));
+  }
+
+  addStudentsWithGroup(name,surname,group_name){
+    const params = new HttpParams()
+      .set('name',name)
+      .set('surname',surname)
+      .set('group_name',group_name)
+      .set("token", this.auth.getToken());
+    const headers = {
+      'Content-Type':'application/x-www-form-urlencoded'
+    };
+    return this.http.post(Constants.url('api/addStudent'),params.toString(),{headers})
+      .pipe(tap(e=>{
+        if(e['status'] === 'auth_fail') this.auth.invalidateSession();
+      }));
+  }
+
+  getStudents() {
+    const params = new HttpParams().set("token", this.auth.getToken());
+    const headers = {
+      'Content-Type':'application/x-www-form-urlencoded'
+    };
+    return this.http.post(Constants.url('api/getStudents'),params.toString(),{headers})
+      .pipe(tap(e=>{
+        if(e['status'] !== 'ok') this.auth.invalidateSession();
+      }));
   }
 }

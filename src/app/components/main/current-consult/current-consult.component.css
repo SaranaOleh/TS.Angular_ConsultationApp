@@ -16,3 +16,10 @@
   display: flex;
   justify-content: flex-end;
 }
+.panel-body>table tr:nth-child(odd){
+  background: #f1d796;
+}
+td, th{
+  padding: 20px;
+  text-align: center;
+}

@@ -1,8 +1,8 @@
 <div class="panel">
-  <ng-container *ngIf="firstConsult === null">
     <div class="panel-header">
       <h1>{{time}}</h1>
-      <button (click)="openConsult()">Начать</button>
+      <button *ngIf="!isOpen" (click)="openConsult()">Начать</button>
+      <button *ngIf="isOpen" (click)="addStudent()">Добавить студента</button>
     </div>
     <div class="panel-body">
       <table>
@@ -11,31 +11,21 @@
           <th>Группа</th>
           <th>Событие</th>
         </tr>
+        <ng-container *ngIf="students.length > 0">
+          <tr *ngFor="let student of students">
+            <td>{{student.name}} {{student.surname}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </ng-container>
       </table>
       <div class="close">
-        <button >Закрыть консультацию</button>
+        <button *ngIf="isOpen">Закрыть консультацию</button>
       </div>
-
     </div>
-  </ng-container>
-  <ng-container *ngIf="firstConsult !== null">
-    <div class="panel-header">
-      <h1>{{time}}</h1>
-    </div>
-    <div class="panel-body">
-      <table>
-        <tr>
-          <th>Имя</th>
-          <th>Группа</th>
-          <th>Событие</th>
-        </tr>
-      </table>
-      <div class="close">
-        <button >Закрыть консультацию</button>
-      </div>
-
-    </div>
-  </ng-container>
-  <button (click)="takeConsult()">CLICK</button>
-
 </div>
+
+<app-preloader [visible]="loading"></app-preloader>
+
+<app-addstudent (loading)="onLoadingChange($event)"  (close)="addingStudent = false" *ngIf="addingStudent"></app-addstudent>
+

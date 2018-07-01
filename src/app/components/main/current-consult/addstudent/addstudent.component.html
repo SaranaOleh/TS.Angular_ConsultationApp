@@ -1,0 +1,43 @@
+<div class="container" (click)="closeWindow()">
+  <div class="form" (click)="$event.stopPropagation()">
+    <div class="nav">
+      <button class="btn" [class.active]="old" (click)="old = true"> Выбрать из списка</button>
+      <button class="btn" [class.active]="!old" (click)="old = !true">Добавить</button>
+    </div>
+    <div class="data" *ngIf="old">
+      <div class="form-group">
+        <select [(ngModel)]="selectedGroupId">
+          <option *ngFor="let group of groups" value="{{group.id}}">{{group.name}}</option>
+        </select>
+        <select [(ngModel)]="selectedStudentId">
+          <ng-container *ngFor="let student of students">
+            <ng-container *ngIf="selectedGroupId === student.group_id">
+              <option value="{{student.id}}">{{student.name}} {{student.surname}}</option>
+            </ng-container>
+          </ng-container>
+      </select>
+      </div>
+      <button (click)="addStudentToConsult()">ок</button>
+    </div>
+
+
+    <div class="data" *ngIf="!old">
+      <div class="checkbox">
+        <input type="checkbox" [(ngModel)]="newGroup">
+        <span> Новая группа</span>
+      </div>
+      <div class="form-group" *ngIf="!newGroup">
+        <select name="test" [(ngModel)]="selectedGroupId">
+          <option *ngFor="let group of groups" value="{{group.id}}" >{{group.name}}</option>
+        </select>
+
+      </div>
+      <input type="text" *ngIf="newGroup" [(ngModel)]="newGroupName">
+
+        <span>Имя</span><input type="text" [(ngModel)]="newStudentData.name">
+        <span>Фамилия</span><input type="text" [(ngModel)]="newStudentData.surname">
+
+      <button (click)="addNewStudent()">ок</button>
+    </div>
+  </div>
+</div>

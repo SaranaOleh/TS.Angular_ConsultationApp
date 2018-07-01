@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ConsultsService} from "../../../services/consults/consults.service";
-import {isObject} from "rxjs/internal/util/isObject";
+
+
 
 @Component({
   selector: 'app-current-consult',
@@ -8,48 +9,43 @@ import {isObject} from "rxjs/internal/util/isObject";
   styleUrls: ['./current-consult.component.css']
 })
 export class CurrentConsultComponent implements OnInit {
-  firstConsult = null;
+  isOpen = false;
+  loading = true;
   time = "";
   private date= new Date();
-  constructor(private consults:ConsultsService) {
-    consults.takeConsult().subscribe(e=>{
-    if(isObject(e['message'])){
-      this.firstConsult = e['message'];
-      let date= new Date(Number(e['message'].starttime));
-      this.time =
-        date.getDay() + '.' +
-        date.getMonth() + '.' +
-        date.getFullYear() + '  ' +
-        date.getHours() + ':' +
-        date.getMinutes()+ ':' +
-        date.getSeconds();
-    }else{
-      this.time =
-        this.date.getDay() + '.' +
-        this.date.getMonth() + '.' +
-        this.date.getFullYear() + '  ' +
-        this.date.getHours() + ':' +
-        this.date.getMinutes()+ ':' +
-        this.date.getSeconds();
-    }
-    });
+  addingStudent = false;
+  students = [];
 
-  }
-
-  ngOnInit() {
-  }
-  openConsult(){
-    let time = Date.parse(this.time);
-    let date = new Date(time);
-    this.consults.openConsult(Date.parse(''+this.date)).subscribe(e=>{
-      alert(e);
-    })
+  constructor(private consults:ConsultsService, private cdRef: ChangeDetectorRef) {
+    this.takeConsult();
   }
   takeConsult(){
     this.consults.takeConsult().subscribe(e=>{
-      let date = new Date(Number(e['message'].starttime));
-      console.log(e['message']);
-      console.log(date.getHours())
+      this.loading = false;
+      if(e['message'][0]){
+        this.isOpen = true;
+        this.date= new Date(Number(e['message'][0].starttime));
+        this.students = e['message'][1];
+      }
+
+      this.time = this.date.toLocaleString();
+    });
+  }
+  ngOnInit() {
+
+  }
+  openConsult(){
+    this.consults.openConsult(this.date.getTime()).subscribe(e=>{
+      alert(e);
     })
+  }
+
+  addStudent() {
+    this.addingStudent = true;
+  }
+
+  onLoadingChange(event: boolean) {
+    this.loading = event;
+    this.cdRef.detectChanges();
   }
 }

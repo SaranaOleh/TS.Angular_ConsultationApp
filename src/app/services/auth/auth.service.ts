@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Constants} from "../../utils/constants";
 import {map, tap} from "rxjs/internal/operators";
 import {of} from "rxjs/index";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router:Router) { }
 
   public register(login:string,pass:string){
     const params = new HttpParams().set("login",login).set("pass",pass);
@@ -54,5 +55,9 @@ export class AuthService {
     };
     return this.http.post(Constants.url('auth/logout'),params.toString(),{headers})
       .pipe(map(r=>r['status']==='ok')).pipe(tap(e=>this.clearToken()))
+  }
+  invalidateSession(){
+    this.clearToken();
+    this.router.navigate(['/login']);
   }
 }

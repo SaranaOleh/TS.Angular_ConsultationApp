@@ -10,6 +10,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { MenuComponent } from './components/menu/menu.component';
 import { CurrentConsultComponent } from './components/main/current-consult/current-consult.component';
 import { HistoryComponent } from './components/main/history/history.component';
+import { PreloaderComponent } from './components/preloader/preloader/preloader.component';
+import { AddstudentComponent } from "./components/main/current-consult/addstudent/addstudent.component";
 
 const mainSubroutes:Routes = [
   {path:"",component:CurrentConsultComponent},
@@ -28,7 +30,9 @@ const routes:Routes = [
     AuthComponent,
     MenuComponent,
     CurrentConsultComponent,
-    HistoryComponent
+    HistoryComponent,
+    PreloaderComponent,
+    AddstudentComponent
   ],
   imports: [
     BrowserModule,
