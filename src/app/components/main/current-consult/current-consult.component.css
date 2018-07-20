@@ -16,7 +16,10 @@
   display: flex;
   justify-content: flex-end;
 }
-.panel-body>table tr:nth-child(odd){
+.panel-body>table tr:first-child{
+  background: darkcyan;
+}
+.panel-body>table tr:nth-child(even):not(:first-child){
   background: #f1d796;
 }
 td, th{

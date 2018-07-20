@@ -14,18 +14,22 @@
         <ng-container *ngIf="students.length > 0">
           <tr *ngFor="let student of students">
             <td>{{student.name}} {{student.surname}}</td>
-            <td></td>
-            <td></td>
+            <td>{{student.group}}</td>
+            <td>
+              <button (click)="dellStudent(student.id)">X</button></td>
           </tr>
         </ng-container>
       </table>
       <div class="close">
-        <button *ngIf="isOpen">Закрыть консультацию</button>
+        <button *ngIf="isOpen" (click)="closeConsult()">Закрыть консультацию</button>
       </div>
     </div>
 </div>
 
 <app-preloader [visible]="loading"></app-preloader>
 
-<app-addstudent (loading)="onLoadingChange($event)"  (close)="addingStudent = false" *ngIf="addingStudent"></app-addstudent>
+<app-addstudent (loading)="onLoadingChange($event)"
+                (close)="addingStudent = false"
+                (onAdd)="takeConsult()"
+                *ngIf="addingStudent"></app-addstudent>
 

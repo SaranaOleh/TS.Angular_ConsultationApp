@@ -10,7 +10,7 @@ import {Observable} from "rxjs/index";
 export class NoAuthGuardService implements CanActivate{
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.auth.isAuth().pipe(tap(b=>{
-      if(b) this.router.navigate(['/login'])
+      if(b) this.router.navigate(['/'])
     })).pipe(map(e=>!e));
   }
 

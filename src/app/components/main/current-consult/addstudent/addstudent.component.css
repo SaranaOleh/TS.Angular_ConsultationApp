@@ -28,6 +28,7 @@
 }
 .form-group select{
   flex: 1;
+  padding: 5px;
 }
 .form-group select:first-child{
   margin-right: 10px;
@@ -41,4 +42,7 @@
   width: 100%;
   text-align: left;
   padding: 20px;
+}
+.data input, .data button{
+  padding: 5px;
 }

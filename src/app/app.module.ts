@@ -12,6 +12,7 @@ import { CurrentConsultComponent } from './components/main/current-consult/curre
 import { HistoryComponent } from './components/main/history/history.component';
 import { PreloaderComponent } from './components/preloader/preloader/preloader.component';
 import { AddstudentComponent } from "./components/main/current-consult/addstudent/addstudent.component";
+import {NoAuthGuardService} from "./services/noauth-guard/noauth-guard.service";
 
 const mainSubroutes:Routes = [
   {path:"",component:CurrentConsultComponent},
@@ -20,7 +21,7 @@ const mainSubroutes:Routes = [
 
 const routes:Routes = [
   {path:"",component:MainComponent,canActivate:[AuthGuardService], children: mainSubroutes},
-  {path:"login",component:AuthComponent}
+  {path:"login",component:AuthComponent, canActivate:[NoAuthGuardService]}
 ];
 
 @NgModule({
